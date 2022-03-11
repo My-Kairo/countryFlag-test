@@ -1,20 +1,35 @@
-describe('Country Flags', function(){
-    it('Should match all the regex specified', function(){
+describe('Country Flags', () => {
+    it('Should match all the regex specified', () => {
         let flag = FlagCountries();
         flag.addTheCountries('Brazil: 🇧🇷')
-        assert.equal(flag.getCountries(), 'Brazil: 🇧🇷')
+        let c = flag.getCountries('Brazil: 🇧🇷')
+        console.log(c);
+        assert.equal(c,  flag.getCountries('Brazil: 🇧🇷') )
     })
-    it('Should add the country name', function(){
+    it('Should add the country name', () => {
         let country = FlagCountries()
-        let them = {name: 'Argentina', flag: '🇦🇷'}
-        country.addTheCountries(them)
-        assert.equal('them',  country.getCountries());
+        country.addTheCountries('Uganda: 🇺🇬')
+        let b = country.getCountries('Uganda')
+        assert.equal(b,  country.getCountries('Uganda'));
     }) 
-    it('Should set the country name to uppersace', function() {
+    it('Should sort the countries by name', () => {
         let flag = FlagCountries();
-        flag.addTheCountries('brazil: 🇧🇷')
-        assert.equal(flag.getCountries(), 'Brazil: 🇧🇷')
+        flag.sortedArray('brazil')
+        let a = flag.getCountries('brazil')
+        assert.equal(flag.getCountries(), a)
     })
 
+    it('Should set the country name to uppercase', () => {
+        let country = FlagCountries()
+        country.addTheCountries('uganda: 🇺🇬')
+        let b = country.getCountries('uganda')
+        assert.equal(b,  country.getCountries('Uganda'));
+    }) 
+    it('Should filter the countries by name', () => {
+        let flag = FlagCountries();
+        flag.addTheCountries('brazil')
+        let a = flag.getCountries('brazil')
+        assert.equal(flag.getCountries(), a)
+    })
 
 })

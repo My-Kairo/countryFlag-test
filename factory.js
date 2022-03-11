@@ -17,37 +17,33 @@ function FlagCountries(country){
     let regex = /[a-zA-z]$/g;
     let reg = /[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/;
 
-
-    function addTheCountries (names, flag){
-        if (names.match(regex) && flag.match(reg)){
+    let addTheCountries = (names, flag) => {
+        if (names.match(regex) && reg.test(flag)){
             if (!flagz.includes(names) && !flagz.includes(flag)) {
-                flagz.push(names) && flag.push(flag)
-                return true
-            }else {
-                return false
+                flagz.push(names) && flagz.push(flag) ? true: false;
             }
         }
-    }
+    } 
     
-    function getCountries (){
-        return flagz;
-    }
-    
+    let getCountries = () => flagz;
 
-    let search = countries.filter(countrry => countrry.flag);
+    let sortedArray = () => countries.sort(function(first, second){
+        if (first.name < second.name)
+            return -1;
+            if (first.name > second.name)
+            return 1;
+            return 0;
+    })
 
-    // function getsearched (){
-    //     return search;
-    search()
-    // }
-    // search = () => flagz;
-    // search()
+    let filtered = ()=> countries.filter( value => {
+        return value == flagz;
+    })
 
 
     return {
         addTheCountries,
         getCountries,
-        getsearched,
-        search()
+        sortedArray,
+        filtered
     }
 }
